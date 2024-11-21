@@ -1,5 +1,6 @@
 ﻿using Jamesnet.Wpf.Controls;
 using System.Windows;
+using WpfExplorer.Support.UI.Units;
 
 namespace WpfExplorer
 {
@@ -7,7 +8,7 @@ namespace WpfExplorer
     {
         protected override Window CreateShell()
         {
-            return new Window();
+            return new DarkWindow();
         }
     }
 }
