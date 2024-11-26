@@ -18,4 +18,13 @@
 - ItemsControl은 컬렉션을 통해 반복되는 데이터를 표시하는 컨트롤이다.
 - TreeView가 파생된 ItemsControl은 ItemsPresenter이 반드시 필요함 (ContentControl에서 기본적으로 Control이 존재하고 ContentPresenter가 확장 개념이였던 것에 반해)
 - Generic.xaml을 통해 관리되는 CustomControl은 로드 시점에 영향을 받지 않는 장점이 있음
-- 
+- ExplorerWindow의 뷰모델인 ExplorerWindowViewModel 생성
+- FileInfoBase, FileInfo 모델 생성
+- DirectoryManager 생성
+- Prism을 통해 객체를 효율적으로 관리하기 위해 Container를 통한 의존성 주입 적용
+- Container에 객체를 등록하는 기능을 담당하는 HelperModules 생성
+- View와 ViewModel을 연결하는 기능을 담당하는 WireDataContext 생성
+- Starter에서 메서드 체이닝을 통해 HelperModules와 WireDataContext를 호출
+- 의존성 주입을 통해 Container에 등록된 DirectoryManager가 자동으로 ExplorerWindowViewModel에 주입되는 것을 확인
+
+## 6 MAIN CONTENT
