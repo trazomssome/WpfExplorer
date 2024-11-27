@@ -28,3 +28,6 @@
 - 의존성 주입을 통해 Container에 등록된 DirectoryManager가 자동으로 ExplorerWindowViewModel에 주입되는 것을 확인
 
 ## 6 MAIN CONTENT
+- WpfExplorer.Main 프로젝트 생성
+- Prism의 Region 기능을 사용하여 ExplorerWindow와 MainContent를 연결
+- FileService 생성, HelperModules에 등록하여 종속성 주입에 활용

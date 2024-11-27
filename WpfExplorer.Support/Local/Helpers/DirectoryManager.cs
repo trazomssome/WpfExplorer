@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace WpfExplorer.Forms.Local.Helpers;
+namespace WpfExplorer.Support.Local.Helpers;
 
 public class DirectoryManager
 {
