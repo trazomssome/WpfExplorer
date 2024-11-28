@@ -31,3 +31,6 @@
 - WpfExplorer.Main 프로젝트 생성
 - Prism의 Region 기능을 사용하여 ExplorerWindow와 MainContent를 연결
 - FileService 생성, HelperModules에 등록하여 종속성 주입에 활용
+- ExpandButton 추가, FolderTreeView, FolderTreeItem 고도화
+- FolderTreeView, FolderTreeItem의 GetContainerForItemOverride 추상메서드를 구현하여 ItemContainer 변경
+- FolderTreeItem을 재귀구조로 구현
