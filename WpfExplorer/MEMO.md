@@ -34,3 +34,6 @@
 - ExpandButton 추가, FolderTreeView, FolderTreeItem 고도화
 - FolderTreeView, FolderTreeItem의 GetContainerForItemOverride 추상메서드를 구현하여 ItemContainer 변경
 - FolderTreeItem을 재귀구조로 구현
+
+## 7 NAVIGATOR SERVICE
+- NavigationService 구현, 뒤로가기, 앞으로가기, 상위폴더로이동 기능 구현

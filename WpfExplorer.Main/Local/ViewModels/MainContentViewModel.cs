@@ -1,23 +1,78 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using CommunityToolkit.Mvvm.Input;
+using Jamesnet.Wpf.Mvvm;
 using WpfExplorer.Support.Local.Helpers;
 using WpfExplorer.Support.Local.Models;
 
 namespace WpfExplorer.Main.Local.ViewModels;
 
-public partial class MainContentViewModel
+public partial class MainContentViewModel : ObservableBase
 {
     private readonly FileService _fileService;
-    public List<FolderInfo> Roots { get; init; }
+    private readonly NavigatorService _navigatorService;
 
-    public MainContentViewModel(FileService fileService)
+    public List<FolderInfo> Roots { get; init; }
+    public ObservableCollection<FolderInfo> Files { get; init; }
+
+    public MainContentViewModel(FileService fileService, NavigatorService navigatorService)
     {
         _fileService = fileService;
-        Roots = fileService.GenerateRootNodes();
+        _navigatorService = navigatorService;
+        _navigatorService.LocationChanged += _navigatorService_LocationChanged;
+
+        Roots = _fileService.GenerateRootNodes();
+        Files = [];
+    }
+
+    private void _navigatorService_LocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        List<FolderInfo> source = GetDirectoryItems(e.Current.FullPath);
+
+        Files.Clear();
+        Files.AddRange(source);
+    }
+
+    private List<FolderInfo> GetDirectoryItems(string fullPath)
+    {
+        List<FolderInfo> items = new();
+
+        string[] dirs = Directory.GetDirectories(fullPath);
+        foreach (string path in dirs)
+        {
+            items.Add(new FolderInfo { FullPath = path });
+        }
+
+        string[] files = Directory.GetFiles(fullPath);
+        foreach (string path in files)
+        {
+            items.Add(new FolderInfo { FullPath = path });
+        }
+        return items;
     }
 
     [RelayCommand]
     private void FolderChanged(FolderInfo folderInfo)
     {
         FileService.RefreshSubdirectories(folderInfo);
+        _navigatorService.ChangeLocation(folderInfo);
+    }
+
+    [RelayCommand]
+    private void GoBack()
+    {
+        _navigatorService.GoBack();
+    }
+
+    [RelayCommand]
+    private void GoForward()
+    {
+        _navigatorService.GoForward();
+    }
+
+    [RelayCommand]
+    private void GoToParent()
+    {
+        _navigatorService.GoToParent();
     }
 }

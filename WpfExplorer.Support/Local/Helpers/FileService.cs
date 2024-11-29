@@ -1,7 +1,7 @@
-﻿using Jamesnet.Wpf.Controls;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using Jamesnet.Wpf.Controls;
 using WpfExplorer.Support.Local.Models;
 
 namespace WpfExplorer.Support.Local.Helpers;
@@ -23,8 +23,15 @@ public class FileService
 
         foreach (DriveInfo drive in DriveInfo.GetDrives())
         {
-            var name = $"{drive.VolumeLabel} ({drive.RootDirectory.FullName.Replace("\\", "")})";
-            roots.Add(CreateFolderInfo(1, name, IconType.MicrosoftWindows, drive.Name));
+            try
+            {
+                var name = $"{drive.VolumeLabel} ({drive.RootDirectory.FullName.Replace("\\", "")})";
+                roots.Add(CreateFolderInfo(1, name, IconType.MicrosoftWindows, drive.Name));
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         return roots;
